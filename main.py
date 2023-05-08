@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from create_annotations import (
+from .create_annotations import (
     create_image_annotation,
     create_annotation_from_yolo_format,
     coco_format,
@@ -16,16 +16,15 @@ import imagesize
 # Don't change the list name 'Classes'          #
 #################################################
 
-YOLO_DARKNET_SUB_DIR = "YOLO_darknet"
+YOLO_DARKNET_SUB_DIR = "../labels"
 
-classes = [
-    "chair",
-    "handle",
-    "table",
-    "button",
-    "person",
-]
-
+classes = ["bachmann_do232",
+           "bachmann_mx213", 
+           "beckhoff_cx1100",
+           "beckhoff_cx5010",
+           "br_x20",
+           "omron_cj2m",
+           "siemens_et200sp"]
 
 def get_images_info_and_annotations(opt):
     path = Path(opt.path)
@@ -169,7 +168,7 @@ def debug(opt):
         cv2.destroyAllWindows()
 
 
-def get_args():
+def get_args(args):
     parser = argparse.ArgumentParser("Yolo format annotations to COCO dataset format")
     parser.add_argument(
         "-p",
@@ -199,13 +198,12 @@ def get_args():
         help="Coco segmentation will be populated with a polygon "
         "that matches replicates the bounding box data.",
     )
-    args = parser.parse_args()
+    args = parser.parse_args(args)
     return args
 
-
 def main(opt):
-    output_name = opt.output
-    output_path = "output/" + output_name
+    output_path = opt.output
+#    output_path = "output/" + output_name
 
     print("Start!")
 
@@ -231,6 +229,10 @@ def main(opt):
 
         print("Finished!")
 
+
+def main_args(args):
+    opt = get_args(args)
+    main(opt)
 
 if __name__ == "__main__":
     options = get_args()
