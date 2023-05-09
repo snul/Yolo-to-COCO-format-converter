@@ -18,13 +18,13 @@ import imagesize
 
 YOLO_DARKNET_SUB_DIR = "../labels"
 
-classes = ["bachmann_do232",
-           "bachmann_mx213", 
+classes = ["bachmann_mx213", 
            "beckhoff_cx1100",
            "beckhoff_cx5010",
            "br_x20",
            "omron_cj2m",
-           "siemens_et200sp"]
+           "siemens_et200sp",
+           "bachmann_do232"]
 
 def get_images_info_and_annotations(opt):
     path = Path(opt.path)
