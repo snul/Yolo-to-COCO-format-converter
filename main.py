@@ -60,6 +60,7 @@ def get_images_info_and_annotations(opt):
             annotations_path = file_path.parent / label_file_name
 
         if not annotations_path.exists():
+            image_id += 1  # create a new image id even if no label exists
             continue  # The image may not have any applicable annotation txt file.
 
         with open(str(annotations_path), "r") as label_file:
